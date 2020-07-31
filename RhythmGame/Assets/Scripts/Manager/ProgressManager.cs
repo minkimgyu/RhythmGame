@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class ProgressManager : MonoBehaviour
 {
-    AudioSource theCenter;
+    NoteManager theNoteManager;
+    Result theResult;
+    AudioManager theAudioManager;
+
     public Image progress;
 
-    Result theResult;
-    NoteManager theNoteManager;
     bool endGame = true;
     bool startGame = false;
 
@@ -17,22 +18,22 @@ public class ProgressManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        theAudioManager = AudioManager.instance;
         theNoteManager = FindObjectOfType<NoteManager>();
-        theCenter = FindObjectOfType<CenterFrame>().myAudio;
         theResult = FindObjectOfType<Result>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (theCenter.isPlaying == true)
+        if (theAudioManager.IsBGMPlaying())
         {
-            progress.fillAmount = theCenter.time / theCenter.clip.length;
-            if(startGame == false)
+            progress.fillAmount = theAudioManager.CheckProgress();
+            if (startGame == false)
                 startGame = true;
         }
 
-        if(theCenter.isPlaying == false && startGame == true && endGame == true)
+        if(theAudioManager.IsBGMPlaying() == false && startGame == true && endGame == true)
         {
             endGame = false;
             theNoteManager.RemoveNote();

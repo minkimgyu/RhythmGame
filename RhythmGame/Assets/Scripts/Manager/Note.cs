@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Note : MonoBehaviour
 {
-    float noteSpeed = 2000; // 설정에서 바꿀 수 있도록 조정한다.
+    float noteSpeed = 1500; // 설정에서 바꿀 수 있도록 조정한다.
     Image noteImage;
 
     void OnEnable()

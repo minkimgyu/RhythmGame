@@ -15,42 +15,42 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeySetting.keys[KeyAction.B1]))
         {
             theTimingManager[3].CheckTiming();
             theTimingManager[3].setClickColor();
         }
-        else if (Input.GetKeyUp(KeyCode.Z))
+        else if (Input.GetKeyUp(KeySetting.keys[KeyAction.B1]))
         {
             theTimingManager[3].setUpColor();
         }
         //
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeySetting.keys[KeyAction.B2]))
         {
             theTimingManager[2].CheckTiming();
             theTimingManager[2].setClickColor();
         }
-        else if (Input.GetKeyUp(KeyCode.X))
+        else if (Input.GetKeyUp(KeySetting.keys[KeyAction.B2]))
         {
             theTimingManager[2].setUpColor();
         }
         //
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeySetting.keys[KeyAction.B3]))
         {
             theTimingManager[1].CheckTiming();
             theTimingManager[1].setClickColor();
         }
-        else if (Input.GetKeyUp(KeyCode.N))
+        else if (Input.GetKeyUp(KeySetting.keys[KeyAction.B3]))
         {
             theTimingManager[1].setUpColor();
         }
         //
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeySetting.keys[KeyAction.B4]))
         {
             theTimingManager[0].CheckTiming();
             theTimingManager[0].setClickColor();
         }
-        else if (Input.GetKeyUp(KeyCode.M))
+        else if (Input.GetKeyUp(KeySetting.keys[KeyAction.B4]))
         {
             theTimingManager[0].setUpColor();
         }

@@ -13,7 +13,7 @@ public class TimingManager : MonoBehaviour
     [SerializeField] RectTransform[] timingRect = null;
     Vector2[] timingBoxs = null;
 
-    [SerializeField] Image containerImage;
+    public Image containerImage;
 
     Color normal = new Color(0, 141f / 255f, 183f / 255f, 0);
     Color click = new Color(0, 141f / 255f, 183f / 255f, 70f / 255f);
@@ -39,22 +39,12 @@ public class TimingManager : MonoBehaviour
     {
         if(containerImage.color != click)
             containerImage.color = click;
-
-        Debug.Log(containerImage.color.r);
-        Debug.Log(containerImage.color.g);
-        Debug.Log(containerImage.color.b);
-        Debug.Log(containerImage.color.a);
     }
 
     public void setUpColor()
     {
         if (containerImage.color != normal)
             containerImage.color = normal;
-
-        Debug.Log(containerImage.color.r);
-        Debug.Log(containerImage.color.g);
-        Debug.Log(containerImage.color.b);
-        Debug.Log(containerImage.color.a);
     }
 
     public void CheckTiming()
