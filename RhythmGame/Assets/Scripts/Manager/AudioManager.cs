@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource bgmPlayer = null;
     [SerializeField] AudioSource[] sfxPlayer = null;
 
+    DatabaseManager theDatabaseManager;
+
     private static AudioManager Instance;
 
     public static AudioManager instance
@@ -49,6 +51,13 @@ public class AudioManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        theDatabaseManager = DatabaseManager.instance;
+        SetBGMVolume(theDatabaseManager.returnData.bgmPlayerVolume);
+        SetSFXVolume(theDatabaseManager.returnData.sfxPlayerVolume);
     }
 
     public float CheckProgress()
@@ -102,12 +111,22 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public float GetBGMVolume()
+    {
+        return bgmPlayer.volume;
+    }
+
+    public float GetSFXVolume()
+    {
+        return sfxPlayer[0].volume;
+    }
+
     public void SetBGMVolume(float volume)
     {
         bgmPlayer.volume = volume;
     }
 
-    public void SetSfXVolume(float volume)
+    public void SetSFXVolume(float volume)
     {
         for (int i = 0; i < sfxPlayer.Length; i++)
         {

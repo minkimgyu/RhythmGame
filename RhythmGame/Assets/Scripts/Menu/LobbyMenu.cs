@@ -5,14 +5,11 @@ using UnityEngine;
 public class LobbyMenu : MonoBehaviour
 {
     public GameObject startPanel;
-    public GameObject optionPanel;
-    public GameObject soundOptionPanel;
-    public GameObject keyOptionPanel;
 
-    public SoundManager theSoundManager;
-    public AudioManager theAudioManager;
-
+    AudioManager theAudioManager;
     bool isActive = false;
+    public GameObject optionPanel;
+
 
     private void Start()
     {
@@ -41,30 +38,5 @@ public class LobbyMenu : MonoBehaviour
     {
         isActive = !isActive;
         optionPanel.SetActive(isActive);
-    }
-
-    public void SetSoundOptionPanel()
-    {
-        isActive = !isActive;
-        optionPanel.SetActive(isActive);
-        soundOptionPanel.SetActive(!isActive);
-    }
-
-    public void SetSoundOptionPanelLeft()
-    {
-        soundOptionPanel.SetActive(isActive);
-        theSoundManager.CheckIsPlaying();
-    }
-
-    public void SetKeyOptionPanel()
-    {
-        isActive = !isActive;
-        optionPanel.SetActive(isActive);
-        keyOptionPanel.SetActive(!isActive);
-    }
-
-    public void SetKeyOptionPanelLeft()
-    {
-        keyOptionPanel.SetActive(isActive);
     }
 }

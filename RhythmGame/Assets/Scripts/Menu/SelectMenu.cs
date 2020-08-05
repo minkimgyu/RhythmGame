@@ -4,22 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum Difficulty { Easy, Normal, Hard }
-
-[System.Serializable]
-public class MusicTable // 음악에 대한 정보를 담고 있음
-{
-    public string musicName;
-    public string composer;
-    public Sprite sprite;
-    public Difficulty difficulty;
-    public int[] score = new int[3] { 0, 0, 0 };
-
-    [HideInInspector] public Color easy = new Color(173f / 255f, 255f / 255f, 165f / 255f);
-    [HideInInspector] public Color normal = new Color(165f / 255f, 232f / 255f, 255f / 255f);
-    [HideInInspector] public Color hard = new Color(255f / 255f, 168f / 255f, 165f / 255f);
-}
-
 public class SelectMenu : MonoBehaviour
 {
     public Scrollbar scrollbar;
@@ -30,7 +14,7 @@ public class SelectMenu : MonoBehaviour
 
     MusicCard[] cards;
 
-    Database TheDatabase;
+    DatabaseManager TheDatabaseManager;
     AudioManager TheAudioManager;
     Transform nowCard;
     float scroll_pos = 0;
@@ -42,7 +26,7 @@ public class SelectMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TheDatabase = Database.instance;
+        TheDatabaseManager = DatabaseManager.instance;
         TheAudioManager = AudioManager.instance;
 
         SetMusicTable(); // 카드를 생성시킨다. --> 카드 생성이 우선임
@@ -98,10 +82,10 @@ public class SelectMenu : MonoBehaviour
 
     public void SetMusicTable()
     {
-        for (int i = 0; i < TheDatabase.musicTables.Count; i++)
+        for (int i = 0; i < TheDatabaseManager.returnData.musicTables.Count; i++)
         {
             MusicCard card = Instantiate(musicCard, content).GetComponent<MusicCard>();
-            card.SetCard(TheDatabase.musicTables[i]);
+            card.SetCard(TheDatabaseManager.returnData.musicTables[i]);
         }
     }
 
@@ -114,7 +98,7 @@ public class SelectMenu : MonoBehaviour
     {
         for (int i = 0; i < cards.Length; i++)
         {
-            TheDatabase.ChangeDifficulty(cards[i], Difficulty.Easy);
+            TheDatabaseManager.ChangeDifficulty(cards[i], Difficulty.Easy);
         }
     }
 
@@ -124,15 +108,15 @@ public class SelectMenu : MonoBehaviour
 
         if (card.difficulty.text.Equals("Easy"))
         {
-            TheDatabase.ChangeDifficulty(card, Difficulty.Normal);
+            TheDatabaseManager.ChangeDifficulty(card, Difficulty.Normal);
         }
         else if (card.difficulty.text.Equals("Normal"))
         {
-            TheDatabase.ChangeDifficulty(card, Difficulty.Hard);
+            TheDatabaseManager.ChangeDifficulty(card, Difficulty.Hard);
         }
         else if (card.difficulty.text.Equals("Hard"))
         {
-            TheDatabase.ChangeDifficulty(card, Difficulty.Easy);
+            TheDatabaseManager.ChangeDifficulty(card, Difficulty.Easy);
         }
     }
 
@@ -150,7 +134,7 @@ public class SelectMenu : MonoBehaviour
 
     public void GoToGamePlayScene()
     {
-        TheDatabase.ReturnTable(cardNum); // 데이터 베이스에 어떤 테이블을 로드할지 보내준다.
+        TheDatabaseManager.ReturnTable(cardNum); // 데이터 베이스에 어떤 테이블을 로드할지 보내준다.
         TheAudioManager.StopBGM(); // 인 게임 씬에서 필요한 노래를 로드하고 다시 실행시킨다.
         Debug.Log("게임 시작");
         SceneManager.LoadScene("InGame");

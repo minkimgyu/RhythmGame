@@ -13,6 +13,7 @@ public class Result : MonoBehaviour
 
     ScoreManager theScore;
     ComboManager theCombo;
+    DatabaseManager theDatabaseManager;
     TimingManager[] theTiming;
 
     int count = 5;
@@ -23,10 +24,13 @@ public class Result : MonoBehaviour
         theScore = FindObjectOfType<ScoreManager>();
         theCombo = FindObjectOfType<ComboManager>();
         theTiming = FindObjectsOfType<TimingManager>();
+        theDatabaseManager = DatabaseManager.instance;
     }
 
     public void ShowResult()
     {
+        
+
         goUI.SetActive(true);
 
         for (int i = 0; i < txtCount.Length; i++)
@@ -47,6 +51,8 @@ public class Result : MonoBehaviour
 
         int t_currentScore = theScore.GetCurrentScore();
         int t_maxCombo = theCombo.GetMaxCombo();
+
+        theDatabaseManager.SetScore(t_currentScore);
 
         for (int z = 0; z < txtCount.Length; z++)
         {
